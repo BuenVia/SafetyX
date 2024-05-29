@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'homestay.apps.HomestayConfig'
+    'homestay.apps.HomestayConfig',
+    'members.apps.MembersConfig',
 ]
 
 MIDDLEWARE = [
