@@ -1,0 +1,19 @@
+{% extends "homestay/base.html" %}
+
+{% if user.is_authenticated %}
+    <p>Raaahhhh</p>
+{% else %}
+    {% block content %}
+        <p>Login...</p>
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            {{ loginform.as_p }}
+
+            <input type="submit" value="Login">
+
+        </form>
+    {% endblock content %}
+{% endif %}
+
