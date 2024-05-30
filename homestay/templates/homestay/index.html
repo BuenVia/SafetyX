@@ -1,7 +1,14 @@
 {% extends "homestay/base.html" %}
 
 {% block content %}
-    <p>Index...</p>
-    <p><a href="register">Register</a></p>
-    <p><a href="login">Login</a></p>
+<div class="container">
+    <div class="welcome-text">
+        <h2>Welcome to the Health and Safety Portal</h2>
+        <p>Please login or register to continue.</p>
+    </div>
+    <div class="button-container">
+        <a href="login" class="btn">Login</a>
+        <a href="register" class="btn">Register</a>
+    </div>
+</div>
 {% endblock content %}
