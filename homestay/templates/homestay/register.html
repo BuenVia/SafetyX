@@ -1,14 +1,13 @@
 {% extends "homestay/base.html" %}
 
 {% block content %}
-    <p>Register...</p>
 
-    <form action="" method="post">
+    <form action="" method="post" class="w-50 mx-auto">
         {% csrf_token %}
-
         {{ registerform.as_p }}
-
-        <input type="submit" value="Register">
-
+        <div class="d-grid gap-2 mt-3">
+            <button type="submit" class="btn btn-secondary">Register</button>
+        </div>
     </form>
+    
 {% endblock content %}

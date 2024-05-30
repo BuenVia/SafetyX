@@ -6,155 +6,96 @@
 
 /* General Styles */
 body, html {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
-/* Navbar Styles */
+/* Navbar */
 .navbar {
-    width: 100%;
-    background-color: #fff;
-    padding: 20px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    background-color: #1f1f1f;
 }
 
-.navbar-title {
-    margin: 0;
-    font-size: 1.5em;
-    color: #444;
-    font-weight: bold;
-    text-decoration: none;
+.navbar .navbar-brand {
+    color: #e0e0e0;
 }
 
-/* Container Styles */
-.container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.navbar .navbar-brand:hover {
+    color: #ffffff;
 }
 
-.welcome-text {
-    margin-bottom: 20px;
+/* Container and Text */
+.container, .container-fluid {
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
-.welcome-text h2 {
-    margin: 0;
-    font-size: 2em;
-    color: #555;
+.text-center {
+    color: #e0e0e0;
 }
 
-.welcome-text p {
-    margin: 10px 0 0;
-    font-size: 1em;
-    color: #777;
-}
-
-/* Button Styles */
-.button-container {
-    display: flex;
-    gap: 20px;
-}
-
-.btn {
-    padding: 15px 30px;
-    border: none;
+/* Forms */
+form {
+    background-color: #1f1f1f;
+    padding: 20px;
     border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    text-decoration: none;
-    background-color: #eee;
-    color: #555;
-    transition: background-color 0.3s;
 }
 
-.btn:hover {
-    background-color: #ddd;
+form input, form button, form select, form textarea {
+    background-color: #333333;
+    color: #e0e0e0;
+    border: 1px solid #444444;
 }
 
-/* Form Styles */
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    max-width: 300px;
+form input::placeholder, form textarea::placeholder {
+    color: #777777;
 }
 
-.form-input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
+form input:focus, form button:focus, form select:focus, form textarea:focus {
+    background-color: #444444;
+    border-color: #555555;
+    color: #ffffff;
 }
 
-/* Main Container */
-.main-container {
-    display: flex;
-    height: calc(100vh - 60px); /* Adjust based on navbar height */
-}
-
-/* Sidebar Styles */
+/* Sidebar */
 .sidebar {
-    width: 250px;
-    background-color: #fff;
-    border-right: 1px solid #ddd;
-    padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #1f1f1f;
+    border-color: #444444;
 }
 
-.sidebar-menu {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.sidebar .nav-link {
+    color: #e0e0e0;
 }
 
-.sidebar-menu li {
-    margin: 0;
+.sidebar .nav-link:hover {
+    background-color: #333333;
+    color: #ffffff;
 }
 
-.sidebar-menu a {
-    display: block;
-    padding: 15px 20px;
-    color: #555;
-    text-decoration: none;
-    transition: background-color 0.3s;
+.sidebar .nav-link.active {
+    background-color: #333333;
+    color: #ffffff;
 }
 
-.sidebar-menu a:hover {
-    background-color: #eee;
-}
-
-/* Main Content Styles */
+/* Main Content */
 .main-content {
-    flex: 1;
-    padding: 40px;
-    background-color: #f9f9f9;
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
-.welcome-message {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
+.welcome-message h2, .welcome-message p {
+    color: #e0e0e0;
 }
 
-.welcome-message h2 {
-    margin: 0 0 20px 0;
-    font-size: 2em;
-    color: #555;
+/* Buttons */
+.btn-secondary {
+    background-color: #444444;
+    border-color: #555555;
+    color: #e0e0e0;
 }
 
-.welcome-message p {
-    margin: 0;
-    font-size: 1.2em;
-    color: #777;
+.btn-secondary:hover {
+    background-color: #555555;
+    border-color: #666666;
+    color: #ffffff;
 }
+

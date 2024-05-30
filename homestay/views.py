@@ -47,3 +47,8 @@ def logout(request):
 def dashboard(request):
     if request.user.is_authenticated:
         return render(request, 'homestay/dashboard.html', {'username': request.user.username})
+
+@login_required(login_url="login")
+def account(request):
+    if request.user.is_authenticated:
+        return render(request, 'homestay/account.html', {'user': request.user})

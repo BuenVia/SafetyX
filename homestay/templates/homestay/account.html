@@ -21,8 +21,13 @@
         </aside>
         <main class="col-md-9 col-lg-10 p-4">
             <div class="text-center">
-                <h2>Welcome, {{ username }}!</h2>
-                <p>Please select an option from the sidebar.</p>
+                <h2>Hello, {{ user.first_name }}!</h2>
+                <input type="text" value="{{ user.id }}"/>
+                <input type="text" value="{{ user.first_name }}"/>
+                <input type="text" value="{{ user.last_name }}"/>
+                <input type="text" value="{{ user.username }}"/>
+                <input type="text" value="{{ user.email }}"/>
+                <input type="text" value="{{ user.password }}"/>
             </div>
         </main>
     </div>
