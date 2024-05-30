@@ -6,7 +6,10 @@ from . forms import CreateUserForm, LoginForm
 
 # Create your views here.
 def index(request):
-    return render(request, 'homestay/index.html')
+    if request.user.is_authenticated:
+        return redirect("dashboard")
+    else:
+        return render(request, 'homestay/index.html')
 
 def register(request):
     form = CreateUserForm()

@@ -3,9 +3,9 @@
 
 {% block content %}
 <div class="container">
-    <div class="welcome-text">
+    {% comment %} <div class="welcome-text">
         <p>Login...</p>
-    </div>
+    </div> {% endcomment %}
     <form action="" method="post" class="form-container">
         {% csrf_token %}
         {{ loginform.as_p }}
