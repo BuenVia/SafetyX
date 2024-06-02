@@ -21,18 +21,13 @@
         </aside>
         <main class="col-md-9 col-lg-10 p-4">
             <div class="text-center">
-                <h2>Hello, {{ user.first_name }}!</h2>
-                <input type="text" value="{{ user.first_name }}"/>
-                <input type="text" value="{{ user.last_name }}"/>
-                <input type="text" value="{{ user.username }}"/>
-                <input type="text" value="{{ user.email }}"/>
-                {% if properties %}
-                    {% for property in properties %}
-                    <input type="text" value="{{ property.name }}"/>
-                    {% endfor %}
-                {% else %}
-                    <p>No properties associated with this account. Please add a property.
-                {% endif %}
+                <form action="" method="post" class="w-50 mx-auto">
+                    {% csrf_token %}
+                    {{ propertyForm.as_p }}
+                    <div class="d-grid gap-2 mt-3">
+                        <button type="submit" class="btn btn-secondary">Add</button>
+                    </div>
+                </form>
             </div>
         </main>
     </div>

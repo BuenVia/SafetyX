@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from . forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm, PropertyForm
+from .models import Property
 
 # Create your views here.
 def index(request):
@@ -51,4 +52,25 @@ def dashboard(request):
 @login_required(login_url="login")
 def account(request):
     if request.user.is_authenticated:
-        return render(request, 'homestay/account.html', {'user': request.user})
+        properties = Property.objects.filter(owner_id=request.user).all()
+        context = {}
+        context['user'] = request.user
+        context['properties'] = properties
+        return render(request, 'homestay/account.html', context=context)
+    
+@login_required
+def property_create(request):
+    if request.user.is_authenticated:
+        context = {}
+        form = PropertyForm()
+        if request.method == "POST":
+            form = PropertyForm(request.POST)
+            if form.is_valid():
+                new_property = form.save(commit=False)
+                new_property.owner_id = request.user
+                new_property.save()
+                return redirect("dashboard")
+        context['propertyForm'] = form
+        context['user'] = request.user
+        return render(request, 'homestay/property-create.html', context=context)
+    

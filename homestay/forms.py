@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms.widgets import PasswordInput, TextInput
 
+from .models import Property
+
 # Register a User (Model Form)
 class CreateUserForm(UserCreationForm):
 
@@ -20,3 +22,11 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-input', 'placeholder': 'Password'})
     )
+
+class PropertyForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        fields = [
+            "name", "apartment_number", "building_name", "street_one", "street_two",
+            "city", "municipality", "country", "post_code"
+            ]
