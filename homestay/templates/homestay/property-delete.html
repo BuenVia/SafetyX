@@ -1,0 +1,23 @@
+{% extends "homestay/base.html" %}
+
+{% block content %}
+
+    <main class="col-md-9 col-lg-10 p-4">
+        <div class="card m-3 p-3">
+            <form action="" method="POST" class="w-50 mx-auto">
+                {% csrf_token %}
+                <label for="" class="form-label">To delete, please write '{{ property.name }}' in the input box.</label>
+                <input type="text" class="form-control" name="property_name">
+                <input type="text" class="form-control" name="property_id" value="{{ property.id }}" hidden>
+                <div class="d-grid gap-2 mt-3">
+                    <button type="submit" class="btn btn-danger">DELETE</button>
+                </div>
+            </form>
+
+            <div class="d-grid gap-2 mt-3">
+                <a href="/homestay/" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </main>
+
+{% endblock content %}

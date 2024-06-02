@@ -47,12 +47,21 @@ def logout(request):
 @login_required(login_url="login")
 def dashboard(request):
     if request.user.is_authenticated:
-        return render(request, 'homestay/dashboard.html', {'username': request.user.username})
+        properties = Property.objects.filter(owner_id=request.user, is_delete=False).all()
+        context = {}
+        context['username'] = request.user
+        context['properties'] = properties
+        return render(request, 'homestay/dashboard.html', context=context)
+
+@login_required
+def question_set(request, id):
+    property = Property.objects.filter(id=id, is_delete=False).first()
+    return render(request, 'homestay/question-set.html', {'property': property})
 
 @login_required(login_url="login")
 def account(request):
     if request.user.is_authenticated:
-        properties = Property.objects.filter(owner_id=request.user).all()
+        properties = Property.objects.filter(owner_id=request.user, is_delete=False).all()
         context = {}
         context['user'] = request.user
         context['properties'] = properties
@@ -74,3 +83,33 @@ def property_create(request):
         context['user'] = request.user
         return render(request, 'homestay/property-create.html', context=context)
     
+@login_required
+def property_edit(request, id):
+    if request.user.is_authenticated:
+        context = {}
+        property = Property.objects.filter(id=id).first()
+        form = PropertyForm(instance=property)
+        if request.method == "POST":
+            form = PropertyForm(request.POST, instance=property)
+            if form.is_valid():
+                update_property = form.save(commit=False)
+                update_property.owner_id = request.user
+                update_property.save()
+                return redirect("/homestay/dashboard")
+            
+        context['propertyForm'] = form
+        context['id'] = id
+        return render(request, 'homestay/property-edit.html', context=context)
+    
+@login_required
+def property_delete(request, id):
+    if request.user.is_authenticated:
+        context = {}
+        property = Property.objects.filter(id=id).first()
+        if request.method == "POST" and request.POST.get('property_name') == property.name:
+            property.is_delete = True
+            property.save()
+            return redirect('/homestay/dashboard')
+        context['property'] = property
+        context['id'] = id
+        return render(request, 'homestay/property-delete.html', context=context)

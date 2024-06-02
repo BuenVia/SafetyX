@@ -1,41 +1,34 @@
 {% extends "homestay/base.html" %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <aside class="col-md-3 col-lg-2 bg-light p-3 border-end">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link">Add Property</a>
-                </li>
-                <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link">Complete Forms</a>
-                </li>
-                <li class="nav-item">
-                    <a href="account" class="nav-link">Account Details</a>
-                </li>
-                <li class="nav-item">
-                    <a href="logout" class="nav-link">Logout</a>
-                </li>
-            </ul>
-        </aside>
-        <main class="col-md-9 col-lg-10 p-4">
-            <div class="text-center">
-                <h2>Hello, {{ user.first_name }}!</h2>
+
+    <main class="col-md-9 col-lg-10 p-4">
+        <div class="card m-3 p-3">
+            <h2>Hello, {{ user.first_name }}!</h2>
+            <div class="mb2">
                 <input type="text" value="{{ user.first_name }}"/>
-                <input type="text" value="{{ user.last_name }}"/>
-                <input type="text" value="{{ user.username }}"/>
-                <input type="text" value="{{ user.email }}"/>
-                {% if properties %}
-                    {% for property in properties %}
-                    <input type="text" value="{{ property.name }}"/>
-                    {% endfor %}
-                {% else %}
-                    <p>No properties associated with this account. Please add a property.
-                {% endif %}
             </div>
-        </main>
-    </div>
-</div>
+            <div class="mb2">
+                <input type="text" value="{{ user.last_name }}"/>
+            </div>
+            <div class="mb2">
+                <input type="text" value="{{ user.username }}"/>
+            </div>
+            <div class="mb2">
+                <input type="text" value="{{ user.email }}"/>
+            </div>
+            {% if properties %}
+            <h4>Properties</h4>
+                {% for property in properties %}
+                <div class="card p-2">
+                    <p>{{ property.name }}</p>
+                    <a href="property-edit/{{ property.id }}"><div class="btn btn-primary">Edit</div></a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No properties associated with this account. Please add a property.
+            {% endif %}
+        </div>
+    </main>
 
 {% endblock content %}

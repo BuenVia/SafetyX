@@ -11,7 +11,7 @@
         {% for property in properties %}
             <div class="card mb-3 p-3">
                 <p>{{ property.name }}</p>
-                <a href="question/{{ property.id }}"><button class="btn btn-secondary">Go</button></a>
+                <a href="{{ property.id }}"><button class="btn btn-secondary">Go</button></a>
             </div>
         {% endfor %}
     </main>

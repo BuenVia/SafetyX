@@ -12,6 +12,7 @@ class Property(models.Model):
     municipality = models.CharField(max_length=255)
     country = models.CharField(max_length=45)
     post_code = models.CharField(max_length=20)
+    is_delete = models.BooleanField(default=False)
     owner_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self): 
