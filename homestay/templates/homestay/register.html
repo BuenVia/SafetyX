@@ -4,7 +4,8 @@
 
     <form action="" method="post" class="w-50 mx-auto">
         {% csrf_token %}
-        {{ registerform.as_p }}
+        <h2>User Details</h2>
+        {{ user_form.as_p }}
         <div class="d-grid gap-2 mt-3">
             <button type="submit" class="btn btn-secondary">Register</button>
         </div>

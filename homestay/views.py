@@ -3,7 +3,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CreateUserForm, LoginForm, PropertyForm
-from .models import Property
+from .models import Property, Company, UserCompany
 
 # Create your views here.
 def index(request):
@@ -13,13 +13,21 @@ def index(request):
         return render(request, 'homestay/index.html')
 
 def register(request):
-    form = CreateUserForm()
+    user_form = CreateUserForm()
     if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
+        user_form = CreateUserForm(request.POST)
+        if user_form.is_valid():
+            ### The company object needs to be referenced in the UserCompany model.
+            company = Company(name=None, phone=None, country=None)
+            company.save()
+            user_form.company_id = company
+            user_form.save()
+            user_company = UserCompany(user_id=user_form,company_id=company)
+            user_company.save()
             return redirect("login")
-    context = {'registerform': form}
+    context = {}
+    context['user_form'] = user_form
+    # context['company_form'] = company_form
     return render(request, 'homestay/register.html', context=context)
 
 
@@ -47,7 +55,9 @@ def logout(request):
 @login_required(login_url="login")
 def dashboard(request):
     if request.user.is_authenticated:
-        properties = Property.objects.filter(owner_id=request.user, is_delete=False).all()
+        ### The property then needs to be looked up by Company, not user
+        user = request.user
+        properties = Property.objects.filter(company_id=request.user, is_delete=False).all()
         context = {}
         context['username'] = request.user
         context['properties'] = properties
@@ -61,7 +71,7 @@ def question_set(request, id):
 @login_required(login_url="login")
 def account(request):
     if request.user.is_authenticated:
-        properties = Property.objects.filter(owner_id=request.user, is_delete=False).all()
+        properties = Property.objects.filter(company_id=request.user, is_delete=False).all()
         context = {}
         context['user'] = request.user
         context['properties'] = properties
@@ -76,7 +86,7 @@ def property_create(request):
             form = PropertyForm(request.POST)
             if form.is_valid():
                 new_property = form.save(commit=False)
-                new_property.owner_id = request.user
+                new_property.company_id = request.user
                 new_property.save()
                 return redirect("dashboard")
         context['propertyForm'] = form
@@ -93,7 +103,7 @@ def property_edit(request, id):
             form = PropertyForm(request.POST, instance=property)
             if form.is_valid():
                 update_property = form.save(commit=False)
-                update_property.owner_id = request.user
+                update_property.company_id = request.user
                 update_property.save()
                 return redirect("/homestay/dashboard")
             
