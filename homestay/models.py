@@ -10,9 +10,9 @@ class Company(models.Model):
     # def __str__(self):
     #     return self.name
 
-class UserCompany(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
+# class UserCompany(models.Model):
+#     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+#     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
 
 class Property(models.Model):
     name = models.CharField(max_length=255)
@@ -25,7 +25,7 @@ class Property(models.Model):
     country = models.CharField(max_length=45)
     post_code = models.CharField(max_length=20)
     is_delete = models.BooleanField(default=False)
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self): 
         return self.name
