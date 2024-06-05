@@ -1,0 +1,21 @@
+{% extends "homestay/base.html" %}
+
+{% block content %}
+
+    <main class="col-md-9 col-lg-10 p-4">
+        <h2>Add Business</h2>
+        <div class="card m-3 p-3">
+            <form action="" method="post" class="w-50 mx-auto">
+                {% csrf_token %}
+                {% for field in business_form %}
+                    <label class="form-label">{{ field.label_tag }}</label>
+                    <input type="text" class="form-control" name="{{ field.name }}">          
+                {% endfor %}
+                <div class="d-grid gap-2 mt-3">
+                    <button type="submit" class="btn btn-secondary">Add</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+{% endblock content %}

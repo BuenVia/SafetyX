@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms.widgets import PasswordInput, TextInput
 
-from .models import Property
+from .models import Property, Business
 
 # Register a User (Model Form)
 class CreateUserForm(UserCreationForm):
@@ -30,3 +30,8 @@ class PropertyForm(forms.ModelForm):
             "name", "apartment_number", "building_name", "street_one", "street_two",
             "city", "municipality", "country", "post_code"
             ]
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        fields = ['name', 'phone', 'country']

@@ -17,13 +17,16 @@
             <div class="mb2">
                 <input type="text" value="{{ user.email }}"/>
             </div>
+            {% if business %}
+            
+            {% endif %}
             {% if properties %}
-            <h4>Properties</h4>
+                <h4>Properties</h4>
                 {% for property in properties %}
-                <div class="card p-2">
-                    <p>{{ property.name }}</p>
-                    <a href="property-edit/{{ property.id }}"><div class="btn btn-primary">Edit</div></a>
-                </div>
+                    <div class="card p-2">
+                        <p>{{ property.name }}</p>
+                        <a href="property-edit/{{ property.id }}"><div class="btn btn-primary">Edit</div></a>
+                    </div>
                 {% endfor %}
             {% else %}
                 <p>No properties associated with this account. Please add a property.

@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import CreateUserForm, LoginForm, PropertyForm
-from .models import Property
+from .forms import CreateUserForm, LoginForm, PropertyForm, BusinessForm
+from .models import Property, Business
 
 # Create your views here.
 def index(request):
@@ -64,6 +64,7 @@ def question_set(request, id):
 def account(request):
     if request.user.is_authenticated:
         properties = Property.objects.filter(user_id=request.user, is_delete=False).all()
+        # business = Business.objects.filter()
         context = {}
         context['user'] = request.user
         context['properties'] = properties
@@ -115,3 +116,18 @@ def property_delete(request, id):
         context['property'] = property
         context['id'] = id
         return render(request, 'homestay/property-delete.html', context=context)
+    
+@login_required
+def business_create(request):
+    if request.user.is_authenticated:
+        context = {}
+        form = BusinessForm()
+        if request.method == "POST":
+            form = BusinessForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect("dashboard")
+        context['business_form'] = form
+        context['user'] = request.user
+        return render(request, 'homestay/business-create.html', context=context)
+    
